@@ -558,7 +558,7 @@ async def handle_callback_user_info(client: Client, query: CallbackQuery):
         CB_USERNAME = MESSAGES_SPLIT[3]
         
         if CALLBACK_DATA.startswith("user info QRCODE") :
-            URL = f"https://{PANEL_DOMAIN}/api/user/{CB_USERNAME}"
+            URL = f"http://{PANEL_DOMAIN}/api/user/{CB_USERNAME}"
             RESPONCE = requests.get(url=URL , headers=PANEL_TOKEN)
             if RESPONCE.status_code == 200 :
                 RESPONCE_DATA = json.loads(RESPONCE.text)
@@ -581,7 +581,7 @@ async def handle_callback_user_info(client: Client, query: CallbackQuery):
             
         elif CALLBACK_DATA.startswith("user info DELETE") :
             if CALLBACK_DATA.startswith("user info DELETE_SURE") :
-                URL = f"https://{PANEL_DOMAIN}/api/user/{CB_USERNAME}"
+                URL = f"http://{PANEL_DOMAIN}/api/user/{CB_USERNAME}"
                 RESPONCE = requests.delete(url=URL , headers=PANEL_TOKEN)
                 if RESPONCE.status_code == 200 :
                     RESPONCE_DATA = json.loads(RESPONCE.text)
