@@ -50,14 +50,14 @@ def DEF_STASE_USER (CHATID , MESSAGE_TEXT , KEYBOARD_HOME):
     SUB_LINK_FINDER = re.findall(r'https://[^/]+/sub/([^/]+)', MESSAGE_TEXT)
     if SUB_LINK_FINDER :
         SUB_TOKEN = DEF_SUB_LINK_FIND_FROM_USER_MESSAGE(SUB_LINK_FINDER[0])
-        URL = f"https://{PANEL_DOMAIN}/sub/{SUB_TOKEN}/info"
+        URL = f"http://{PANEL_DOMAIN}/sub/{SUB_TOKEN}/info"
     else :
-        URL = f"https://{PANEL_DOMAIN}/api/user/{MESSAGE_TEXT}"
+        URL = f"http://{PANEL_DOMAIN}/api/user/{MESSAGE_TEXT}"
     RESPONCE = requests.get(url=URL , headers=PANEL_TOKEN)
     if RESPONCE.status_code == 200 :
         RESPONCE_DATA = json.loads(RESPONCE.text)
     else :
-        URL = f"https://{PANEL_DOMAIN}/api/users"
+        URL = f"http://{PANEL_DOMAIN}/api/users"
         RESPONCE = requests.get(url=URL , headers=PANEL_TOKEN)
         if RESPONCE.status_code == 200 :
             RESPONCE_DATA = RESPONCE.json()
