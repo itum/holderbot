@@ -44,7 +44,7 @@ def DEF_IMPORT_DATA (CHATID) :
 
 def DEF_PANEL_ACCESS(PANEL_USER, PANEL_PASS, PANEL_DOMAIN) :
     PANEL_TOKEN_DATA = {"username" : PANEL_USER , "password" : PANEL_PASS }
-    PANEL_TOKEN = requests.post(url=f"https://{PANEL_DOMAIN}/api/admin/token" , data=PANEL_TOKEN_DATA)
+    PANEL_TOKEN = requests.post(url=f"http://{PANEL_DOMAIN}/api/admin/token" , data=PANEL_TOKEN_DATA)
     if PANEL_TOKEN.status_code == 200 :
         PANEL_TOKEN_BACK = json.loads(PANEL_TOKEN.text)
         PANEL_HEADERS = {
@@ -147,7 +147,7 @@ def DEF_CHANGE_MESSAGER_STATUS(CHATID):
     else :
         PANEL_USER, PANEL_PASS, PANEL_DOMAIN = DEF_IMPORT_DATA (CHATID)
         PANEL_TOKEN = DEF_PANEL_ACCESS(PANEL_USER, PANEL_PASS, PANEL_DOMAIN)
-        URL = f"https://{PANEL_DOMAIN}/api/inbounds"
+        URL = f"http://{PANEL_DOMAIN}/api/inbounds"
         RESPONCE = requests.get(url=URL, headers=PANEL_TOKEN)
         if RESPONCE.status_code == 200:
             INBOUNDS = json.loads(RESPONCE.text)
