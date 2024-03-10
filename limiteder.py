@@ -15,7 +15,7 @@ with app :
             if STATUS == "on" :
                 PANEL_USER, PANEL_PASS, PANEL_DOMAIN = DEF_IMPORT_DATA (BOSS_CHATID)
                 PANEL_TOKEN = DEF_PANEL_ACCESS(PANEL_USER, PANEL_PASS, PANEL_DOMAIN)
-                URL = f"https://{PANEL_DOMAIN}/api/users?status=limited"
+                URL = f"http://{PANEL_DOMAIN}/api/users?status=limited"
                 RESPONCE = requests.get(url=URL , headers=PANEL_TOKEN)
                 
                 if RESPONCE.status_code == 200 :
@@ -23,7 +23,7 @@ with app :
                     for USER in RESPONCE_DATA["users"] :
                         if not USER["inbounds"] == {'shadowsocks': ['Holderbot']} :
                             USERNAME = USER["username"]
-                            URL = f"https://{PANEL_DOMAIN}/api/user/{USERNAME}"
+                            URL = f"http://{PANEL_DOMAIN}/api/user/{USERNAME}"
                             DATA = {"proxies":{"shadowsocks":{}},"inbounds" : {'shadowsocks': ['Holderbot']}}
                             RESPONCE = requests.put(url=URL , json=DATA , headers=PANEL_TOKEN)
                             if RESPONCE.status_code == 200 :
